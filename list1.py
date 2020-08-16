@@ -5,7 +5,9 @@ Kenzie assignment: List1
 """
 # Your name, plus anyone who helped you with this assignment.
 # Give credit where credit is due.
-__author__ = "???"
+__author__ = """David Guzman, with help from stackoverflow:
+https://stackoverflow.com/questions/4554115/sorting-tuples-in-python-with-a-custom-key
+"""
 
 # Copyright 2010 Google Inc.
 # Licensed under the Apache License, Version 2.0
@@ -27,7 +29,11 @@ __author__ = "???"
 
 def match_ends(words):
     # your code here
-    return
+    count = 0
+    for word in words:
+        if word[:1] == word[-1:] and len(word) >= 2:
+            count += 1
+    return count
 
 
 # B. front_x
@@ -43,7 +49,19 @@ def match_ends(words):
 
 def front_x(words):
     # your code here
-    return
+    new_list = []
+    az_list = []
+    for word in words:
+        if word[:1] == "x":
+            new_list.append(word)
+        if word[:1] != "x":
+            az_list.append(word)
+
+    new_list.sort()
+    az_list.sort()
+    new_list.extend(az_list)
+
+    return new_list
 
 
 # C. sort_last
@@ -56,12 +74,17 @@ def front_x(words):
 
 
 def sort_last(tuples):
-    # your code here
-    return
 
+    def last_tuple(elem):
+        return elem[-1]
 
+    tuples.sort(key=last_tuple)
+
+    return tuples
 # Provided simple test() function used in main() to print
 # what each function returns vs. what it's supposed to return.
+
+
 def test(got, expected):
     if got == expected:
         prefix = ' OK '
